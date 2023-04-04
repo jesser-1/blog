@@ -1,0 +1,27 @@
+
+ <%= form_with model: [ @article, @article.comments.build ] do |form| %>
+
+          <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+            <div class="d-flex flex-start w-100">
+              <div class="form-outline w-100">
+              <%= form.label :commenter %>
+              <%= form.text_field :commenter %>
+              </div><br>
+              <div class="form-outline w-100">
+              <%= form.label :body ,:class =>"form-label" , :for =>"textAreaExample" %>
+               <%= form.text_area :body,:class =>"form-control", :id =>"textAreaExample", :rows =>"4",
+                  :style =>"background: #fff;" %>
+             
+                
+              </div>
+              
+              
+            </div>
+            <%= form.label :status %><br>
+            <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+            <div class="float-end mt-2 pt-1">
+             <%= form.submit %>
+            </div>
+          </div>
+     
+<% end %>
