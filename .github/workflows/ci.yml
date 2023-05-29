@@ -1,0 +1,56 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7.6'
+        bundler-cache: true
+    - name: Cache gems
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-ci-development2-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-ci-development2-
+    - name: Install Dependencies
+      run: |
+        gem install bundler -v 1.17.3
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+    - name: Pre-compile assets
+      run: bundle exec rake assets:precompile
+    - name: Run RuboCop
+      run: bundle exec rubocop --parallel
+    - uses: nanasess/setup-chromedriver@master      
+      
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Datatbase
+      run: |
+        apt-get install -y sqlite3 libsqlite3-dev
+        export RAILS_ENV=test
+        bundle exec rake db:create
+        bundle exec rake db:schema:load
+        bundle exec rake db:migrate
+        bundle exec rake parallel:create
+    - name: Run tests
+      run: |
+        RAILS_ENV=test bundle exec rake parallel:spec
+    - name: Upload rspec screenshots
+      if: ${{ job.status != 'success' }}
+      uses: actions/upload-artifact@master
+      with:
+        name: rspec-screenshots
+        path: tmp/screenshots
