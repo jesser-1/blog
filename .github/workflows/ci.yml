@@ -31,8 +31,7 @@ jobs:
         bundle install --jobs 4 --retry 3
     - name: Pre-compile assets
       run: bundle exec rake assets:precompile
-    - uses: nanasess/setup-chromedriver@master      
-      
+    - uses: nanasess/setup-chromedriver@master
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Setup Datatbase
