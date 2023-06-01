@@ -129,6 +129,8 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.23.0)
+    parallel_tests (4.2.1)
+      parallel
     parser (3.2.2.1)
       ast (~> 2.4.1)
     public_suffix (5.0.1)
@@ -296,6 +298,7 @@ DEPENDENCIES
   factory_bot
   jbuilder (~> 2.7)
   listen (~> 3.0.5)
+  parallel_tests
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.6)
