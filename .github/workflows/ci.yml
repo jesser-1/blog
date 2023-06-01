@@ -42,7 +42,7 @@ jobs:
         APP_URL: http://127.0.0.1:3333
         DATABASE_URL: sqlite3:///db/test.sqlite3
       run: |
-        bundle execrake db:migrate RAILS_ENV=test
+        bundle exec rake db:migrate RAILS_ENV=test
         bundle exec rake parallel:spec
     - name: Upload rspec screenshots
       if: ${{ job.status != 'success' }}
