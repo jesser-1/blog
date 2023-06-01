@@ -36,13 +36,13 @@ gem 'simple_token_authentication', '~> 1.0' # see semver.org
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails', '~> 5.0.0'
 end
 gem 'rubocop'
 gem 'rubocop-performance'
 gem 'rubocop-rails', require: false
 gem 'listen', '~> 3.0.5'
 gem 'parallel_tests'
+gem 'rspec-rails', '~> 5.0.0'
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -57,7 +57,6 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
-  gem 'rspec'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
