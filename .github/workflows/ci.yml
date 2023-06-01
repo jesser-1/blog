@@ -40,8 +40,7 @@ jobs:
       run: bundle exec rake db:migrate
     - name: Run tests
       run: |
-        export APP_URL=$APP_URL
-        bundle exec rake spec
+        export APP_URL=$APP_URL bundle exec rake spec
     - name: Upload rspec screenshots
       if: ${{ job.status != 'success' }}
       uses: actions/upload-artifact@master
