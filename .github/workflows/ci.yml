@@ -36,12 +36,12 @@ jobs:
     - uses: nanasess/setup-chromedriver@master
     - name: Setup Datatbase
       run: bundle exec rake db:migrate
-    - name: Set up environment variables
-      run: |
-        export APP_URL=127.0.0.1:${{ github.run_number }}
     - name: Run tests
+      env:
+        APP_URL: http://127.0.0.1:3333
+        DATABASE_URL: sqlite3:///db/test.sqlite3
       run: |
-        APP_URL=127.0.0.1:${{ github.run_number }} bundle exec rake parallel:spec
+        bundle exec rake parallel:spec
     - name: Upload rspec screenshots
       if: ${{ job.status != 'success' }}
       uses: actions/upload-artifact@master
