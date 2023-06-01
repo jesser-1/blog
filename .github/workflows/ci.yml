@@ -36,6 +36,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Setup Datatbase
       run: |
+        export RAILS_ENV=test
         bundle exec rake db:create
         bundle exec rake db:schema:load
         bundle exec rake db:migrate
