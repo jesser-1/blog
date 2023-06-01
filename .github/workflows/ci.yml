@@ -34,10 +34,13 @@ jobs:
     #- name: Run RuboCop
       #run: bundle exec rubocop --parallel
     - uses: nanasess/setup-chromedriver@master
+      env:
+        APP_URL: 'http://localhost:3000'
     - name: Setup Datatbase
       run: bundle exec rake db:migrate
     - name: Run tests
       run: |
+        export APP_URL=$APP_URL
         bundle exec rake parallel:spec
     - name: Upload rspec screenshots
       if: ${{ job.status != 'success' }}
