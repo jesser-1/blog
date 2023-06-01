@@ -36,7 +36,7 @@ jobs:
     - uses: nanasess/setup-chromedriver@master
     - name: Setup Datatbase
       run: |
-            bundle execrake db:migrate RAILS_ENV=test
+            bundle execr ake db:migrate RAILS_ENV=test
     - name: Run tests
       env:
         APP_URL: http://127.0.0.1:3333
