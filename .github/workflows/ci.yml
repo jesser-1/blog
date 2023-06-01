@@ -41,7 +41,7 @@ jobs:
         export APP_URL="http://127.0.0.1:${{ github.run_number }}"
     - name: Run tests
       run: |
-        export APP_URL="http://127.0.0.1:${{ github.run_number }}" bundle exec rake spec
+        APP_URL="http://127.0.0.1:${{ github.run_number }}" bundle exec rake parallel:spec
     - name: Upload rspec screenshots
       if: ${{ job.status != 'success' }}
       uses: actions/upload-artifact@master
