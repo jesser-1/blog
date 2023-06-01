@@ -38,10 +38,10 @@ jobs:
       run: bundle exec rake db:migrate
     - name: Set up environment variables
       run: |
-        export APP_URL="http://127.0.0.1:${{ github.run_number }}"
+        export APP_URL=127.0.0.1:${{ github.run_number }}
     - name: Run tests
       run: |
-        APP_URL="http://127.0.0.1:${{ github.run_number }}" bundle exec rake parallel:spec
+        APP_URL=127.0.0.1:${{ github.run_number }} bundle exec rake parallel:spec
     - name: Upload rspec screenshots
       if: ${{ job.status != 'success' }}
       uses: actions/upload-artifact@master
