@@ -31,6 +31,8 @@ jobs:
         bundle install --jobs 4 --retry 3
     - name: Pre-compile assets
       run: bundle exec rake assets:precompile
+    #- name: Run RuboCop
+      #run: bundle exec rubocop --parallel
     - uses: nanasess/setup-chromedriver@master
     - name: Checkout code
       uses: actions/checkout@v2
