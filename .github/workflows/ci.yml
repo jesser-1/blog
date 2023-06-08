@@ -37,6 +37,8 @@ jobs:
     - name: Setup Datatbase
       run: |
             bundle exec rake db:migrate
+    - name: Set permissions for /db
+      run: chmod 777 /db
     - name: Run tests
       env:
         APP_URL: http://127.0.0.1:3333
