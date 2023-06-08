@@ -24,6 +24,8 @@ jobs:
         key: ${{ runner.os }}-ci-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-ci-
+    - name: Set up SQLite3
+      run: sudo apt-get install sqlite3 libsqlite3-dev
     - name: Install Dependencies
       run: |
         gem install bundler -v 1.17.3
@@ -36,10 +38,10 @@ jobs:
     - uses: nanasess/setup-chromedriver@master
     - name: Setup Datatbase
       run: |
+        cp config/database.yml.example config/database.yml
         bundle exec rake db:create
         bundle exec rake db:schema:load
         bundle exec rake db:migrate
-        bundle exec rake parallel:create
     - name: Run tests
       env:
         APP_URL: http://127.0.0.1:3333
