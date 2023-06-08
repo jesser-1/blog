@@ -36,9 +36,10 @@ jobs:
     - uses: nanasess/setup-chromedriver@master
     - name: Setup Datatbase
       run: |
-            bundle exec rake db:migrate
-    - name: Set permissions for /db
-      run: chmod 777 db
+        bundle exec rake db:create
+        bundle exec rake db:schema:load
+        bundle exec rake db:migrate
+        bundle exec rake parallel:create
     - name: Run tests
       env:
         APP_URL: http://127.0.0.1:3333
