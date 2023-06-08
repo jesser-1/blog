@@ -38,9 +38,7 @@ jobs:
     - uses: nanasess/setup-chromedriver@master
     - name: Setup Datatbase
       run: |
-        cp config/database.yml config/database.yml
-        bundle exec rake db:create
-        bundle exec rake db:schema:load
+        bundle exec rails db:create db:schema:load --trace
         bundle exec rake db:migrate
     - name: Run tests
       env:
