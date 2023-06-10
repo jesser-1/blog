@@ -36,6 +36,9 @@ jobs:
     - uses: nanasess/setup-chromedriver@master
     - name: Setup Datatbase
       run: |
+            export RAILS_ENV=test
+            bundle exec rake db:create
+            bundle exec rake schema:load
             bundle exec rake db:migrate
             sudo chown -R www-data:www-data blog/
             sudo chmod -R 777 blog/
