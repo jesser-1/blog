@@ -40,8 +40,7 @@ jobs:
             bundle exec rake db:create
             bundle exec rake db:schema:load
             bundle exec rake db:migrate
-            sudo chown -R www-data:www-data blog/
-            sudo chmod -R 777 blog/
+            sudo chown www-data .
     - name: Run tests
       run: |
         bundle exec rake rspec
