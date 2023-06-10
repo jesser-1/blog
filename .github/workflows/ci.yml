@@ -43,7 +43,7 @@ jobs:
             sudo chown www-data .
     - name: Run tests
       run: |
-        bundle exec rake rspec
+        bundle exec rake spec
     - name: Upload rspec screenshots
       if: ${{ job.status != 'success' }}
       uses: actions/upload-artifact@master
