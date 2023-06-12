@@ -36,15 +36,14 @@ jobs:
     - uses: nanasess/setup-chromedriver@master
     - name: Setup Datatbase
       run: |
+            export RAILS_ENV=test
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
             bundle exec rake db:migrate
-            sudo chown -R www-data:www-data blog/
-            sudo chmod -R 777 blog/
+            sudo chown www-data .
     - name: Run tests
-      env:
-        APP_URL: http://127.0.0.1:3333
-        DATABASE_URL: sqlite3:///db/test.sqlite3
       run: |
-        bundle exec rake parallel:spec
+        bundle exec rake spec
     - name: Upload rspec screenshots
       if: ${{ job.status != 'success' }}
       uses: actions/upload-artifact@master
